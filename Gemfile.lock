@@ -1,0 +1,27 @@
+GIT
+  remote: git://github.com/onelogin/aead.git
+  revision: 16475b876c2cd02951db8952c92214244204d11b
+  ref: master
+  specs:
+    aead (1.8.1)
+      macaddr (~> 1)
+
+PATH
+  remote: .
+  specs:
+    apple_pay (0.1.0)
+      aead
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    macaddr (1.7.1)
+      systemu (~> 2.6.2)
+    systemu (2.6.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  aead!
+  apple_pay!
