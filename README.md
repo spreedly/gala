@@ -2,6 +2,8 @@
 
 Ruby library for decrypting [Apple Pay tokens](https://developer.apple.com/library/ios/documentation/PassKit/Reference/PaymentTokenJSON/PaymentTokenJSON.html).
 
+*Note: This library is not currently being used in a production environment. Please approach with caution.*
+
 ## Usage
 
 This Apple Pay library works by:
