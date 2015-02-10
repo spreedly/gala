@@ -4,6 +4,14 @@ Ruby library for decrypting [Apple Pay tokens](https://developer.apple.com/libra
 
 *Note: This library is not currently being used in a production environment. Please approach with caution.*
 
+## Install
+
+Add to your `Gemfile`:
+
+```ruby
+gem "apple_pay", git: "https://github.com/spreedly/apple_pay.git"
+```
+
 ## Usage
 
 This Apple Pay library works by:
