@@ -40,7 +40,7 @@ class Gala::PaymentTokenTest < Test::Unit::TestCase
   end
 
   def test_decrypt
-    payment_data = @payment_token.decrypt(@certificate, @private_key)
+    payment_data = JSON.parse(@payment_token.decrypt(@certificate, @private_key))
     assert_equal "4109370251004320", payment_data["applicationPrimaryAccountNumber"]
     assert_equal "200731", payment_data["applicationExpirationDate"]
     assert_equal "840", payment_data["currencyCode"]

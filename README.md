@@ -29,7 +29,8 @@ token = Gala::PaymentToken.new(token_attrs)
 certificate_pem = File.read("mycert.pem")
 private_key_pem = File.read("private_key.pem")
 
-token.decrypt(certificate_pem, private_key_pem)
+decrypted_json = token.decrypt(certificate_pem, private_key_pem)
+JSON.parse(decrypted_json)
 # =>
 {
   "applicationPrimaryAccountNumber"=>"4109370251004320",

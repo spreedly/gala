@@ -31,8 +31,8 @@ module Gala
       shared_secret = self.class.generate_shared_secret(private_key, ephemeral_public_key)
       symmetric_key = self.class.generate_symmetric_key(merchant_id, shared_secret)
 
-      decrypted_json = self.class.decrypt(Base64.decode64(data), symmetric_key)
-      JSON.parse(decrypted_json)
+      # Return JSON string, up to caller to parse
+      self.class.decrypt(Base64.decode64(data), symmetric_key)
     end
 
     class << self
