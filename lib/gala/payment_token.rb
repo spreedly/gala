@@ -2,8 +2,8 @@ require 'openssl'
 require 'base64'
 require 'aead'
 
-module ApplePay
-  class Token
+module Gala
+  class PaymentToken
 
     MERCHANT_ID_FIELD_OID = "1.2.840.113635.100.6.32"
 

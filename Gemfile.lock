@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    apple_pay (0.1.0)
+    gala (0.2.0)
       aead
 
 GEM
@@ -24,4 +24,4 @@ PLATFORMS
 
 DEPENDENCIES
   aead!
-  apple_pay!
+  gala!
