@@ -55,3 +55,4 @@ $ ruby test/payment_token_test.rb
 ## Contributors
 
 * [jnormore](https://github.com/jnormore) for his help with figuring out how to decrypt this thing.
+* [mrezentes](https://github.com/mrezentes) implemented the signature verification.

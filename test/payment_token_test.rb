@@ -51,4 +51,12 @@ class Gala::PaymentTokenTest < Test::Unit::TestCase
     assert_equal "Af9x/QwAA/DjmU65oyc1MAABAAA=", payment_data["paymentData"]["onlinePaymentCryptogram"]
     assert_equal "5", payment_data["paymentData"]["eciIndicator"]
   end
+
+  def test_failed_decrypt
+    @payment_token.data = "bogus4OZho15e9Yp5K0EtKergKzeRpPAjnKHwmSNnagxhjwhKQ5d29sfTXjdbh1CtTJ4DYjsD6kfulNUnYmBTsruphBz7RRVI1WI8P0LrmfTnImjcq1mi"
+    exception = assert_raise Gala::PaymentToken::InvalidSignatureError do
+      JSON.parse(@payment_token.decrypt(@certificate, @private_key))
+    end
+    assert_equal("The given signature is not a valid ECDSA signature.", exception.message)
+  end
 end
