@@ -1,3 +1,3 @@
 module Gala
-  VERSION = "0.2.0" unless defined? Gala::VERSION
+  VERSION = "0.3.0" unless defined? Gala::VERSION
 end
