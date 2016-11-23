@@ -1,6 +1,8 @@
 # Gala
 
-Named after the [Gala apple](http://en.wikipedia.org/wiki/Gala_(apple)), Gala is a Ruby library for decrypting [Apple Pay payment tokens](https://developer.apple.com/library/ios/documentation/PassKit/Reference/PaymentTokenJSON/PaymentTokenJSON.html).
+Named after the [Gala apple](http://en.wikipedia.org/wiki/Gala_(apple), Gala is a Ruby library for decrypting [Apple Pay payment tokens](https://developer.apple.com/library/ios/documentation/PassKit/Reference/PaymentTokenJSON/PaymentTokenJSON.html).
+
+Gala is available under the MIT License.
 
 ## Install
 
