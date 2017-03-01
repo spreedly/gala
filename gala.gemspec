@@ -1,22 +1,28 @@
-$LOAD_PATH.push File.expand_path("../lib", __FILE__)
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'gala/version'
 
-Gem::Specification.new do |s|
-  s.name              = "gala"
-  s.version           = Gala::VERSION
-  s.platform          = Gem::Platform::RUBY
-  s.authors           = ["Mark Bennett", "Ryan Daigle"]
-  s.email             = ["ryan@spreedly.com"]
-  s.homepage          = "https://github.com/spreedly/gala"
-  s.summary           = "Apple Pay payment token decryption library"
-  s.description       = "Given an (encrypted) Apple Pay token, verify and decrypt it"
+Gem::Specification.new do |spec|
+  spec.name              = "gala"
+  spec.version           = Gala::VERSION
+  spec.authors           = ["Mark Bennett", "Ryan Daigle"]
+  spec.email             = ["ryan@spreedly.com"]
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  spec.summary           = "Apple Pay payment token decryption library"
+  spec.description       = "Given an (encrypted) Apple Pay token, verify and decrypt it"
+  spec.homepage          = "https://github.com/spreedly/gala"
+  spec.license           = "MIT"
 
-  s.required_ruby_version = ">= 1.8.7"
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test)/}) }
+  spec.test_files    = `git ls-files -- test/*`.split("\n")
+  spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  spec.require_paths = ["lib"]
 
-  s.add_runtime_dependency 'aead'
+  spec.required_ruby_version = ">= 1.8.7"
+
+  spec.add_runtime_dependency 'aead'
+
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
 end

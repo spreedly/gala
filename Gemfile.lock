@@ -17,6 +17,7 @@ GEM
   specs:
     macaddr (1.7.1)
       systemu (~> 2.6.2)
+    rake (12.0.0)
     systemu (2.6.4)
 
 PLATFORMS
@@ -24,4 +25,9 @@ PLATFORMS
 
 DEPENDENCIES
   aead!
+  bundler
   gala!
+  rake
+
+BUNDLED WITH
+   1.14.3

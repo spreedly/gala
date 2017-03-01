@@ -1,1 +1,18 @@
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+*.gem
+.byebug_history
+
+# rbenv
 .ruby-version
+
+# macOS
+.DS_Store
