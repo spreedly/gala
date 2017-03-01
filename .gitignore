@@ -1,1 +1,3 @@
 .ruby-version
+pkg/
+.DS_Store

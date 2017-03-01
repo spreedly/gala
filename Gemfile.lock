@@ -10,13 +10,14 @@ PATH
   remote: .
   specs:
     gala (0.3.1)
-      aead
+      aead (~> 1.8)
 
 GEM
   remote: https://rubygems.org/
   specs:
     macaddr (1.7.1)
       systemu (~> 2.6.2)
+    rake (12.0.0)
     systemu (2.6.5)
 
 PLATFORMS
@@ -24,7 +25,9 @@ PLATFORMS
 
 DEPENDENCIES
   aead!
+  bundler (~> 1.14)
   gala!
+  rake (~> 12.0)
 
 BUNDLED WITH
    1.14.6

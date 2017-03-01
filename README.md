@@ -9,8 +9,16 @@ Gala is available under the MIT License.
 Add to your `Gemfile`:
 
 ```ruby
-gem "gala", git: "https://github.com/spreedly/gala.git"
+gem "gala", "~> 0.3.1"
 ```
+
+Or, if you need to track a development branch:
+
+```ruby
+gem "gala", git: "https://github.com/spreedly/gala.git", ref: master
+```
+
+Then `bundle install` to fetch Gala into your local environment.
 
 ## Usage
 
@@ -49,13 +57,49 @@ JSON.parse(decrypted_json)
 ## Testing
 
 ```session
-$ ruby -Ilib test/payment_token_test.rb
-...
-5 tests, 18 assertions, 0 failures, 0 errors, 0 skips
+$ rake test
+Started
+......
+
+Finished in 0.017918 seconds.
 ```
+
+## Releasing
+
+To cut a new gem:
+
+### Setup RubyGems account
+
+Make sure you have a [RubyGems account](https://rubygems.org) and have setup your local gem credentials with something like this:
+
+```bash
+$ curl -u rwdaigle https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials; chmod 0600 ~/.gem/credentials
+<enter rubygems account password>
+```
+
+If you are not yet listed as a gem owner, you will need to [request access](http://guides.rubygems.org/command-reference/#gem-owner) from @rwdaigle.
+
+### Release
+
+Build and release the gem with (all changes should be committed and pushed to Github):
+
+```bash
+$ rake release
+```
+
+## Changelog
+
+### v0.3.1
+
+* Use Shopify aead library for compatibility w/ Ruby >= v2.2
+
+### v0.3.0
+
+* Verify payment token signature
 
 ## Contributors
 
+* [dankimio](https://github.com/dankimio)
 * [davidsantoso](https://github.com/davidsantoso)
 * [mrezentes](https://github.com/mrezentes)
 * [jnormore](https://github.com/jnormore)
