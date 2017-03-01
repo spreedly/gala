@@ -22,4 +22,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 1.8.7"
 
   spec.add_runtime_dependency 'aead'
+
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
 end
