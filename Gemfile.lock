@@ -1,15 +1,15 @@
 GIT
-  remote: git://github.com/onelogin/aead.git
-  revision: 16475b876c2cd02951db8952c92214244204d11b
-  ref: master
+  remote: git://github.com/shopify/aead.git
+  revision: 340e7718d8bd9c1fcf3c443e32f439436ea2b70d
+  ref: 340e7718d8bd9c1fcf3c443e32f439436ea2b70d
   specs:
-    aead (1.8.1)
+    aead (1.8.2)
       macaddr (~> 1)
 
 PATH
   remote: .
   specs:
-    gala (0.3.0)
+    gala (0.3.1)
       aead
 
 GEM
@@ -17,7 +17,7 @@ GEM
   specs:
     macaddr (1.7.1)
       systemu (~> 2.6.2)
-    systemu (2.6.4)
+    systemu (2.6.5)
 
 PLATFORMS
   ruby
@@ -25,3 +25,6 @@ PLATFORMS
 DEPENDENCIES
   aead!
   gala!
+
+BUNDLED WITH
+   1.13.7
