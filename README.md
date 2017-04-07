@@ -6,18 +6,16 @@ Gala is available under the MIT License.
 
 ## Install
 
-Add both `gala` and `aead` to your `Gemfile`. Specifying `aead` is necessary to pull in the Shopify version of the library which has been updated to support Ruby versions 2.2 and above.
+Add to your `Gemfile`:
 
 ```ruby
-gem "gala", "~> 0.3.1"
-gem 'aead', git: 'https://github.com/Shopify/aead.git', ref: '340e7718d8bd9c1fcf3c443e32f439436ea2b70d'
+gem 'gala', '~> 0.3.1'
 ```
 
 If you need to track a development branch or reference functionality not yet contained in the RubyGem release you can specify the gala repo directly.
 
 ```ruby
-gem "gala", git: "https://github.com/spreedly/gala.git", ref: :master
-gem 'aead', git: 'https://github.com/Shopify/aead.git', ref: '340e7718d8bd9c1fcf3c443e32f439436ea2b70d'
+gem 'gala', git: 'https://github.com/spreedly/gala.git'
 ```
 
 Then `bundle install` to fetch Gala into your local environment.
@@ -90,6 +88,10 @@ $ rake release
 ```
 
 ## Changelog
+
+### HEAD
+
+* Use Ruby OpenSSL library, drop aead dependency, drop support for Ruby <= 2.2
 
 ### v0.3.1
 
