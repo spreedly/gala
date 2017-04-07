@@ -49,12 +49,13 @@ JSON.parse(decrypted_json)
 ## Testing
 
 ```session
-$ ruby test/payment_token_test.rb
+$ ruby -Ilib test/payment_token_test.rb
 ...
 5 tests, 18 assertions, 0 failures, 0 errors, 0 skips
 ```
 
 ## Contributors
 
-* [jnormore](https://github.com/jnormore) for his help with figuring out how to decrypt this thing.
-* [mrezentes](https://github.com/mrezentes) implemented the signature verification.
+* [davidsantoso](https://github.com/davidsantoso)
+* [mrezentes](https://github.com/mrezentes)
+* [jnormore](https://github.com/jnormore)
