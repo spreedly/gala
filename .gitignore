@@ -1,3 +1,18 @@
-.ruby-version
-pkg/
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+*.gem
+
+# macOS
 .DS_Store
+# rbenv
+.ruby-version
+# byebug
+.byebug_history

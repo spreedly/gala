@@ -1,6 +1,5 @@
 require 'openssl'
 require 'base64'
-require 'aead'
 
 module Gala
   class PaymentToken
@@ -111,11 +110,26 @@ module Gala
       end
 
       def decrypt(encrypted_data, symmetric_key)
-        init_length = 16
-        init_vector = 0.chr * init_length
-        mode = ::AEAD::Cipher.new('aes-256-gcm')
-        cipher = mode.new(symmetric_key, iv_len: init_length)
-        cipher.decrypt(init_vector, '', encrypted_data)
+        # Initialization vector of 16 null bytes
+        iv_length = 16
+        # 0.chr => "\x00"
+        iv = 0.chr * iv_length
+
+        # Last 16 bytes (iv_length) of encrypted data
+        tag = encrypted_data[-iv_length..-1]
+        # Data without tag
+        encrypted_data = encrypted_data[0..(-iv_length - 1)]
+
+        cipher = OpenSSL::Cipher::AES.new(256, :GCM).decrypt
+        cipher.key = symmetric_key
+        cipher.iv_len = iv_length
+        cipher.iv = iv
+
+        # Decipher without associated authentication data
+        cipher.auth_tag = tag
+        cipher.auth_data = ''
+
+        cipher.update(encrypted_data) + cipher.final
       end
     end
   end
