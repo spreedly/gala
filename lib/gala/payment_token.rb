@@ -69,6 +69,9 @@ module Gala
           verified = p7.verify([], store, verification_string, OpenSSL::PKCS7::NOVERIFY )
           raise InvalidSignatureError, "The given signature is not a valid ECDSA signature." unless verified
         end
+
+        # Ensure that the signing time is within "a few minutes"
+        raise InvalidSignatureError, "Token not signed within a few minutes" unless p7.signers.length == 1 && p7.signers.first.signed_time.between?(Time.now - 5*60, Time.now + 5*60)
       end
 
       def chain_of_trust_verified?(leaf_cert, intermediate_cert, root_cert)
