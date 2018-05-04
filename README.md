@@ -1,5 +1,7 @@
 # Gala
 
+[![CircleCI](https://circleci.com/gh/spreedly/gala.svg?style=svg)](https://circleci.com/gh/spreedly/gala)
+
 Named after the [Gala apple](http://en.wikipedia.org/wiki/Gala_(apple)), Gala is a Ruby library for decrypting [Apple Pay payment tokens](https://developer.apple.com/library/ios/documentation/PassKit/Reference/PaymentTokenJSON/PaymentTokenJSON.html).
 
 Gala is available under the MIT License.
