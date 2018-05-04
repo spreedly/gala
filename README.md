@@ -91,6 +91,12 @@ $ rake release
 
 ## Changelog
 
+### v0.3.2
+
+* Setup CircleCI for more comprehensive Ruby version/compatibility testing
+* Use Minitest instead of TestUnit to more seamlessly support higher Ruby versions
+* Last planned release that supports < Ruby 2.4
+
 ### v0.3.1
 
 * Use Shopify aead library for compatibility w/ Ruby >= v2.2
