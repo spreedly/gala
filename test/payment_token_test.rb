@@ -1,9 +1,9 @@
 $LOAD_PATH.push File.expand_path("../lib", __FILE__)
-require 'test/unit'
+require 'minitest/autorun'
 require 'json'
 require 'gala'
 
-class Gala::PaymentTokenTest < Test::Unit::TestCase
+class Gala::PaymentTokenTest < Minitest::Test
 
   def setup
     fixtures = File.dirname(__FILE__) + "/fixtures/"
@@ -45,7 +45,7 @@ class Gala::PaymentTokenTest < Test::Unit::TestCase
     assert_equal "200731", payment_data["applicationExpirationDate"]
     assert_equal "840", payment_data["currencyCode"]
     assert_equal 100, payment_data["transactionAmount"]
-    assert_equal nil, payment_data["cardholderName"]
+    assert_nil payment_data["cardholderName"]
     assert_equal "040010030273", payment_data["deviceManufacturerIdentifier"]
     assert_equal "3DSecure", payment_data["paymentDataType"]
     assert_equal "Af9x/QwAA/DjmU65oyc1MAABAAA=", payment_data["paymentData"]["onlinePaymentCryptogram"]
@@ -54,7 +54,7 @@ class Gala::PaymentTokenTest < Test::Unit::TestCase
 
   def test_failed_decrypt
     @payment_token.data = "bogus4OZho15e9Yp5K0EtKergKzeRpPAjnKHwmSNnagxhjwhKQ5d29sfTXjdbh1CtTJ4DYjsD6kfulNUnYmBTsruphBz7RRVI1WI8P0LrmfTnImjcq1mi"
-    exception = assert_raise Gala::PaymentToken::InvalidSignatureError do
+    exception = assert_raises Gala::PaymentToken::InvalidSignatureError do
       JSON.parse(@payment_token.decrypt(@certificate, @private_key))
     end
     assert_equal("The given signature is not a valid ECDSA signature.", exception.message)
