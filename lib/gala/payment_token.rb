@@ -55,7 +55,7 @@ module Gala
         raise InvalidSignatureError, "Signature does not contain the correct custom OIDs." unless leaf_cert && intermediate_cert
 
         # Ensure that the root CA is the Apple Root CA - G3
-        root_cert = certificate = OpenSSL::X509::Certificate.new(APPLE_ROOT_CERT)
+        root_cert = OpenSSL::X509::Certificate.new(APPLE_ROOT_CERT)
 
         # Ensure that there is a valid X.509 chain of trust from the signature to the root CA
         raise InvalidSignatureError, "Unable to verify a valid chain of trust from signature to root certificate." unless chain_of_trust_verified?(leaf_cert, intermediate_cert, root_cert)
