@@ -1,3 +1,4 @@
 .ruby-version
 pkg/
 .DS_Store
+Gemfile.lock
