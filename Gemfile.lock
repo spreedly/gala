@@ -1,24 +1,25 @@
 PATH
   remote: .
   specs:
-    gala (0.3.2)
-      openssl (~> 2.0)
+    gala (0.4.0)
+      openssl (>= 3.0.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    minitest (5.11.3)
-    openssl (2.1.0)
-    rake (12.3.1)
+    minitest (5.17.0)
+    openssl (3.1.0)
+    rake (12.3.3)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-20
+  x86_64-darwin-21
 
 DEPENDENCIES
-  bundler (~> 1.14)
+  bundler (~> 2.3)
   gala!
   minitest
   rake (~> 12.0)
 
 BUNDLED WITH
-   1.16.1
+   2.3.4
