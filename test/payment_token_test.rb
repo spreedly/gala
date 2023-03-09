@@ -8,12 +8,12 @@ class Gala::PaymentTokenTest < Minitest::Test
   def setup
     fixtures = File.dirname(__FILE__) + "/fixtures/"
     @token_attrs = JSON.parse(File.read(fixtures + "token.json"))
-    @certificate = File.read(fixtures + "certificate.pem", :encoding => 'ASCII-8BIT')
-    @private_key = File.read(fixtures + "private_key.pem", :encoding => 'ASCII-8BIT')
+    @certificate = File.read(fixtures + "certificate.pem")
+    @private_key = File.read(fixtures + "private_key.pem")
     @payment_token = Gala::PaymentToken.new(@token_attrs)
     @merchant_id = "358DA5890B9555C0A9EFB84B5CD6FF04BFDCD5AABF5DC14B9872D8DF51EAF439"
-    @shared_secret = Base64.decode64("kHeh3zl41M+afin6kc+x8EyTeyaqVKLt5PhXnfspzwg=")
-    @symmetric_key = Base64.decode64("cZa29ESUCTGi770mBdtePJrhpfhmUo+XIDDBIHxpXts=")
+    @shared_secret = Base64.decode64("yCUzDuNYTnUnANZEdxC7+DvPmqNslB2YWYn68SBsJHU=")
+    @symmetric_key = Base64.decode64("3GTXJ4RuP/IhS23hsdOw2J2ecAZmC0RasbPIFdC3nQM=")
 
   end
 
@@ -43,17 +43,15 @@ class Gala::PaymentTokenTest < Minitest::Test
   def test_decrypt
     temp = @payment_token.decrypt(@certificate, @private_key)
     payment_data = JSON.parse(temp)
-    assert true
-    # assert_equal "4109370251004320", payment_data["applicationPrimaryAccountNumber"]
-    # assert_equal "200731", payment_data["applicationExpirationDate"]
-    # assert_equal "840", payment_data["currencyCode"]
-    # assert_equal 100, payment_data["transactionAmount"]
-    # assert_nil payment_data["cardholderName"]
-    # assert_equal "040010030273", payment_data["deviceManufacturerIdentifier"]
-    # assert_equal "3DSecure", payment_data["paymentDataType"]
-    # assert_equal "Af9x/QwAA/DjmU65oyc1MAABAAA=", payment_data["paymentData"]["onlinePaymentCryptogram"]
-    # assert_equal "5", payment_data["paymentData"]["eciIndicator"]
-  end
+    assert_equal "5353756319181169", payment_data["applicationPrimaryAccountNumber"]
+    assert_equal "240930", payment_data["applicationExpirationDate"]
+    assert_equal "840", payment_data["currencyCode"]
+    assert_equal 100, payment_data["transactionAmount"]
+    assert_nil payment_data["cardholderName"]
+    assert_equal "050110030273", payment_data["deviceManufacturerIdentifier"]
+    assert_equal "3DSecure", payment_data["paymentDataType"]
+    assert_equal "AMwBRjPWDnAgAA7Rls7mAoABFA==", payment_data["paymentData"]["onlinePaymentCryptogram"]
+    end
 
   def test_failed_decrypt
     @payment_token.data = "bogus4OZho15e9Yp5K0EtKergKzeRpPAjnKHwmSNnagxhjwhKQ5d29sfTXjdbh1CtTJ4DYjsD6kfulNUnYmBTsruphBz7RRVI1WI8P0LrmfTnImjcq1mi"
