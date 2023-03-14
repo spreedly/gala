@@ -51,7 +51,7 @@ class Gala::PaymentTokenTest < Minitest::Test
     assert_equal "050110030273", payment_data["deviceManufacturerIdentifier"]
     assert_equal "3DSecure", payment_data["paymentDataType"]
     assert_equal "AMwBRjPWDnAgAA7Rls7mAoABFA==", payment_data["paymentData"]["onlinePaymentCryptogram"]
-    end
+  end
 
   def test_failed_decrypt
     @payment_token.data = "bogus4OZho15e9Yp5K0EtKergKzeRpPAjnKHwmSNnagxhjwhKQ5d29sfTXjdbh1CtTJ4DYjsD6kfulNUnYmBTsruphBz7RRVI1WI8P0LrmfTnImjcq1mi"
