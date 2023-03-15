@@ -11,9 +11,10 @@ class Gala::PaymentTokenTest < Minitest::Test
     @certificate = File.read(fixtures + "certificate.pem")
     @private_key = File.read(fixtures + "private_key.pem")
     @payment_token = Gala::PaymentToken.new(@token_attrs)
-    @merchant_id = "F938F4658CA2C1C9C38B8DFCB5DBB2A2245607DDE2F114620E8468EF52D208CA"
-    @shared_secret = Base64.decode64("a2pPfemSdA560FnzLSv8zfdlWdGJTonApOLq1zfgx8w=")
-    @symmetric_key = Base64.decode64("HOSago9Z1DhhukQvzmgpuCGPuwq1W0AgasMQWNZvUIY=")
+    @merchant_id = "358DA5890B9555C0A9EFB84B5CD6FF04BFDCD5AABF5DC14B9872D8DF51EAF439"
+    @shared_secret = Base64.decode64("yCUzDuNYTnUnANZEdxC7+DvPmqNslB2YWYn68SBsJHU=")
+    @symmetric_key = Base64.decode64("3GTXJ4RuP/IhS23hsdOw2J2ecAZmC0RasbPIFdC3nQM=")
+
   end
 
   def test_initialize
@@ -40,16 +41,16 @@ class Gala::PaymentTokenTest < Minitest::Test
   end
 
   def test_decrypt
-    payment_data = JSON.parse(@payment_token.decrypt(@certificate, @private_key))
-    assert_equal "4109370251004320", payment_data["applicationPrimaryAccountNumber"]
-    assert_equal "200731", payment_data["applicationExpirationDate"]
+    temp = @payment_token.decrypt(@certificate, @private_key)
+    payment_data = JSON.parse(temp)
+    assert_equal "5353756319181169", payment_data["applicationPrimaryAccountNumber"]
+    assert_equal "240930", payment_data["applicationExpirationDate"]
     assert_equal "840", payment_data["currencyCode"]
     assert_equal 100, payment_data["transactionAmount"]
     assert_nil payment_data["cardholderName"]
-    assert_equal "040010030273", payment_data["deviceManufacturerIdentifier"]
+    assert_equal "050110030273", payment_data["deviceManufacturerIdentifier"]
     assert_equal "3DSecure", payment_data["paymentDataType"]
-    assert_equal "Af9x/QwAA/DjmU65oyc1MAABAAA=", payment_data["paymentData"]["onlinePaymentCryptogram"]
-    assert_equal "5", payment_data["paymentData"]["eciIndicator"]
+    assert_equal "AMwBRjPWDnAgAA7Rls7mAoABFA==", payment_data["paymentData"]["onlinePaymentCryptogram"]
   end
 
   def test_failed_decrypt

@@ -96,6 +96,10 @@ $ rake release
 
 ## Changelog
 
+### v0.5.0
+
+*Update Openssl to support Ruby 3
+
 ### v0.4.0
 
 * Remove unmaintained `aead` gem dependency
