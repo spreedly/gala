@@ -17,11 +17,11 @@ module Gala
 
     def initialize(token_attrs)
       self.version = token_attrs["version"]
-      self.data = token_attrs["data"]
-      self.signature = token_attrs["signature"]
-      headers = token_attrs["header"]
-      self.transaction_id = headers["transactionId"]
-      self.ephemeral_public_key = headers["ephemeralPublicKey"]
+      self.data = token_attrs.fetch("data")
+      self.signature = token_attrs.fetch("signature")
+      headers = token_attrs.fetch("header")
+      self.transaction_id = headers.fetch("transactionId")
+      self.ephemeral_public_key = headers.fetch("ephemeralPublicKey")
       self.public_key_hash = headers["publicKeyHash"]
       self.application_data = headers["applicationData"]
     end
