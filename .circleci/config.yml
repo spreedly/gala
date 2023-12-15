@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  ruby-2.4:
+    docker:
+      - image: circleci/ruby:2.4.4
+    steps:
+      - checkout
+      - run: bundle
+      - run: rake test
+  ruby-2.5:
+    docker:
+      - image: circleci/ruby:2.5.1
+    steps:
+      - checkout
+      - run: bundle
+      - run: rake test
+workflows:
+  version: 2
+  rubies:
+    jobs:
+      - ruby-2.4
+      - ruby-2.5

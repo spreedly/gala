@@ -1,6 +1,5 @@
 require 'openssl'
 require 'base64'
-require 'aead'
 
 module Gala
   class PaymentToken
@@ -56,7 +55,7 @@ module Gala
         raise InvalidSignatureError, "Signature does not contain the correct custom OIDs." unless leaf_cert && intermediate_cert
 
         # Ensure that the root CA is the Apple Root CA - G3
-        root_cert = certificate = OpenSSL::X509::Certificate.new(APPLE_ROOT_CERT)
+        root_cert = OpenSSL::X509::Certificate.new(APPLE_ROOT_CERT)
 
         # Ensure that there is a valid X.509 chain of trust from the signature to the root CA
         raise InvalidSignatureError, "Unable to verify a valid chain of trust from signature to root certificate." unless chain_of_trust_verified?(leaf_cert, intermediate_cert, root_cert)
@@ -114,11 +113,26 @@ module Gala
       end
 
       def decrypt(encrypted_data, symmetric_key)
-        init_length = 16
-        init_vector = 0.chr * init_length
-        mode = ::AEAD::Cipher.new('aes-256-gcm')
-        cipher = mode.new(symmetric_key, iv_len: init_length)
-        cipher.decrypt(init_vector, '', encrypted_data)
+        # Initialization vector of 16 null bytes
+        iv_length = 16
+        # 0.chr => "\x00"
+        iv = 0.chr * iv_length
+
+        # Last 16 bytes (iv_length) of encrypted data
+        tag = encrypted_data[-iv_length..-1]
+        # Data without tag
+        encrypted_data = encrypted_data[0..(-iv_length - 1)]
+
+        cipher = OpenSSL::Cipher.new("aes-256-gcm").decrypt
+        cipher.key = symmetric_key
+        cipher.iv_len = iv_length
+        cipher.iv = iv
+
+        # Decipher without associated authentication data
+        cipher.auth_tag = tag
+        cipher.auth_data = ''
+
+        cipher.update(encrypted_data) + cipher.final
       end
     end
   end

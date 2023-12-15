@@ -1,23 +1,28 @@
 # Gala
 
+[![CircleCI](https://circleci.com/gh/spreedly/gala.svg?style=svg)](https://circleci.com/gh/spreedly/gala)
+
 Named after the [Gala apple](http://en.wikipedia.org/wiki/Gala_(apple)), Gala is a Ruby library for decrypting [Apple Pay payment tokens](https://developer.apple.com/library/ios/documentation/PassKit/Reference/PaymentTokenJSON/PaymentTokenJSON.html).
 
 Gala is available under the MIT License.
 
+## Ruby support
+
+* For Ruby v2.3 and below, please use the [legacy-ruby branch](https://github.com/spreedly/gala/commits/legacy-ruby), or specify gala v0.3.2.
+* For Ruby >= 2.4, use the master branch or specify gala v0.4 and above
+
 ## Install
 
-Add both `gala` and `aead` to your `Gemfile`. Specifying `aead` is necessary to pull in the Shopify version of the library which has been updated to support Ruby versions 2.2 and above.
+Add `gala` to your `Gemfile`.
 
 ```ruby
-gem "gala", "~> 0.3.1"
-gem 'aead', git: 'https://github.com/Shopify/aead.git', ref: '340e7718d8bd9c1fcf3c443e32f439436ea2b70d'
+gem "gala", "~> 0.4.0"
 ```
 
 If you need to track a development branch or reference functionality not yet contained in the RubyGem release you can specify the gala repo directly.
 
 ```ruby
 gem "gala", git: "https://github.com/spreedly/gala.git", ref: :master
-gem 'aead', git: 'https://github.com/Shopify/aead.git', ref: '340e7718d8bd9c1fcf3c443e32f439436ea2b70d'
 ```
 
 Then `bundle install` to fetch Gala into your local environment.
@@ -90,6 +95,21 @@ $ rake release
 ```
 
 ## Changelog
+
+### v0.5.0
+
+*Update Openssl to support Ruby 3
+
+### v0.4.0
+
+* Remove unmaintained `aead` gem dependency
+* Rely on Ruby 2.4 openssl support for aes-256-gcm ciphers (and specifying the initialization vector length).
+
+### v0.3.2
+
+* Setup CircleCI for more comprehensive Ruby version/compatibility testing
+* Use Minitest instead of TestUnit to more seamlessly support higher Ruby versions
+* Last planned release that supports < Ruby 2.4
 
 ### v0.3.1
 
