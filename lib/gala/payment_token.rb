@@ -8,6 +8,7 @@ module Gala
     LEAF_CERTIFICATE_OID = "1.2.840.113635.100.6.29"
     INTERMEDIATE_CERTIFICATE_OID = "1.2.840.113635.100.6.2.14"
     APPLE_ROOT_CERT = File.read(File.dirname(__FILE__) + "/resources/AppleRootCA-G3.pem")
+    SIGNATURE_VALIDITY_TIME_WINDOW = 5 * 60 # 5 minutes
 
     attr_accessor :version, :data, :signature, :transaction_id, :ephemeral_public_key,
       :public_key_hash, :application_data
@@ -68,6 +69,9 @@ module Gala
           verified = p7.verify([], store, verification_string, OpenSSL::PKCS7::NOVERIFY )
           raise InvalidSignatureError, "The given signature is not a valid ECDSA signature." unless verified
         end
+
+        # Ensure that the signing time is within "a few minutes"
+        raise InvalidSignatureError, "Token not signed within a few minutes" unless p7.signers.length == 1 && p7.signers.first.signed_time.between?(Time.now - SIGNATURE_VALIDITY_TIME_WINDOW, Time.now + SIGNATURE_VALIDITY_TIME_WINDOW)
       end
 
       def chain_of_trust_verified?(leaf_cert, intermediate_cert, root_cert)
