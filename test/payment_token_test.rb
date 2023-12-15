@@ -2,6 +2,7 @@ $LOAD_PATH.push File.expand_path("../lib", __FILE__)
 require 'minitest/autorun'
 require 'json'
 require 'gala'
+require 'timecop'
 
 class Gala::PaymentTokenTest < Minitest::Test
 
@@ -14,7 +15,7 @@ class Gala::PaymentTokenTest < Minitest::Test
     @merchant_id = "358DA5890B9555C0A9EFB84B5CD6FF04BFDCD5AABF5DC14B9872D8DF51EAF439"
     @shared_secret = Base64.decode64("yCUzDuNYTnUnANZEdxC7+DvPmqNslB2YWYn68SBsJHU=")
     @symmetric_key = Base64.decode64("3GTXJ4RuP/IhS23hsdOw2J2ecAZmC0RasbPIFdC3nQM=")
-
+    @signature_timestamp = Time.new(2021, 9, 1, 19, 3, 06, "+00:00")
   end
 
   def test_initialize
@@ -41,7 +42,10 @@ class Gala::PaymentTokenTest < Minitest::Test
   end
 
   def test_decrypt
-    temp = @payment_token.decrypt(@certificate, @private_key)
+    temp = nil
+    Timecop.freeze(@signature_timestamp) do
+      temp = @payment_token.decrypt(@certificate, @private_key)
+    end
     payment_data = JSON.parse(temp)
     assert_equal "5353756319181169", payment_data["applicationPrimaryAccountNumber"]
     assert_equal "240930", payment_data["applicationExpirationDate"]
@@ -56,8 +60,21 @@ class Gala::PaymentTokenTest < Minitest::Test
   def test_failed_decrypt
     @payment_token.data = "bogus4OZho15e9Yp5K0EtKergKzeRpPAjnKHwmSNnagxhjwhKQ5d29sfTXjdbh1CtTJ4DYjsD6kfulNUnYmBTsruphBz7RRVI1WI8P0LrmfTnImjcq1mi"
     exception = assert_raises Gala::PaymentToken::InvalidSignatureError do
-      JSON.parse(@payment_token.decrypt(@certificate, @private_key))
+      Timecop.freeze(@signature_timestamp) do
+        JSON.parse(@payment_token.decrypt(@certificate, @private_key))
+      end
     end
     assert_equal("The given signature is not a valid ECDSA signature.", exception.message)
+  end
+
+  # Should fail if a signature is more than 5 minutes old
+  def test_failed_decrypt_replay_attack
+    exception = assert_raises Gala::PaymentToken::InvalidSignatureError do
+      Timecop.freeze(@signature_timestamp + 6 * 60) do
+        JSON.parse(@payment_token.decrypt(@certificate, @private_key))
+      end
+    end
+    assert_equal("Token not signed within a few minutes", exception.message)
+
   end
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gala (0.4.0)
+    gala (0.5.0)
       openssl (= 3.1.0)
 
 GEM
@@ -10,6 +10,7 @@ GEM
     minitest (5.18.0)
     openssl (3.1.0)
     rake (12.3.3)
+    timecop (0.9.8)
 
 PLATFORMS
   ruby
@@ -19,6 +20,7 @@ DEPENDENCIES
   gala!
   minitest
   rake (~> 12.0)
+  timecop
 
 BUNDLED WITH
    1.17.3
