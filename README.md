@@ -98,7 +98,7 @@ $ rake release
 
 ### v0.6.0
 
-* Update Openssl to v3.2.3
+* Update Openssl to v3.3.2
 
 ### v0.5.0
 
