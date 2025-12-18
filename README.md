@@ -16,7 +16,7 @@ Gala is available under the MIT License.
 Add `gala` to your `Gemfile`.
 
 ```ruby
-gem "gala", "~> 0.4.0"
+gem "gala", "~> 0.6.0"
 ```
 
 If you need to track a development branch or reference functionality not yet contained in the RubyGem release you can specify the gala repo directly.
@@ -96,9 +96,13 @@ $ rake release
 
 ## Changelog
 
+### v0.6.0
+
+* Update Openssl to v3.3.2
+
 ### v0.5.0
 
-*Update Openssl to support Ruby 3
+* Update Openssl to support Ruby 3
 
 ### v0.4.0
 

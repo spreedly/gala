@@ -12,8 +12,8 @@ class Gala::PaymentTokenTest < Minitest::Test
     @private_key = File.read(fixtures + "private_key.pem")
     @payment_token = Gala::PaymentToken.new(@token_attrs)
     @merchant_id = "358DA5890B9555C0A9EFB84B5CD6FF04BFDCD5AABF5DC14B9872D8DF51EAF439"
-    @shared_secret = Base64.decode64("yCUzDuNYTnUnANZEdxC7+DvPmqNslB2YWYn68SBsJHU=")
-    @symmetric_key = Base64.decode64("3GTXJ4RuP/IhS23hsdOw2J2ecAZmC0RasbPIFdC3nQM=")
+    @shared_secret = Base64.decode64("Q6K4bWGJr18ICajyZXrNsXRh3tSrdL2yarqfOg/LC6Q=")
+    @symmetric_key = Base64.decode64("l78K79fLkxWvUMgcyA48wZZ5zGRs14RDiqU8u1O5gCo=")
 
   end
 
@@ -43,14 +43,14 @@ class Gala::PaymentTokenTest < Minitest::Test
   def test_decrypt
     temp = @payment_token.decrypt(@certificate, @private_key)
     payment_data = JSON.parse(temp)
-    assert_equal "5353756319181169", payment_data["applicationPrimaryAccountNumber"]
-    assert_equal "240930", payment_data["applicationExpirationDate"]
+    assert_equal "4830269090105619", payment_data["applicationPrimaryAccountNumber"]
+    assert_equal "281231", payment_data["applicationExpirationDate"]
     assert_equal "840", payment_data["currencyCode"]
     assert_equal 100, payment_data["transactionAmount"]
     assert_nil payment_data["cardholderName"]
-    assert_equal "050110030273", payment_data["deviceManufacturerIdentifier"]
+    assert_equal "040010030273", payment_data["deviceManufacturerIdentifier"]
     assert_equal "3DSecure", payment_data["paymentDataType"]
-    assert_equal "AMwBRjPWDnAgAA7Rls7mAoABFA==", payment_data["paymentData"]["onlinePaymentCryptogram"]
+    assert_equal "AwAAAAEAPf9aR9AAAAAAgIpgAgA=", payment_data["paymentData"]["onlinePaymentCryptogram"]
   end
 
   def test_failed_decrypt
